@@ -21,6 +21,7 @@ samples, guidance on mobile development, and a full API reference.
 - https://flutter-ko.dev/docs/get-started/codelab
 - https://codelabs.developers.google.com/codelabs/first-flutter-app-pt1/#0
 - https://codelabs.developers.google.com/codelabs/first-flutter-app-pt2/#0
+- https://flutter.dev/docs/get-started/flutter-for/react-native-devs#entry-point
 
 
 다음 리소스에서 Flutter SDK에 대해 자세히 알아보십시오.
@@ -36,3 +37,5 @@ samples, guidance on mobile development, and a full API reference.
 다른 자료들 :
 - [자세한 해설서](https://flutter.dev/docs/get-started/flutter-for/react-native-devs)
 - [Dart.js에 부트 스트랩](https://flutter.dev/docs/get-started/flutter-for/react-native-devs)
+- [로컬 Notification 라이브러리](https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/lib/main.dart)
+- [로컬 Notification 라이브러리 관련 글](https://medium.com/@riokim/flutter-%EC%97%90%EC%84%9C-notification-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-ddce8af82123)

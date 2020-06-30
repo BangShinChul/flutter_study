@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+// import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -12,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Startup Name Generator',
       theme: ThemeData(primaryColor: Colors.white),
-      home: RandomWords(),
+      // home: RandomWords(),
+      home: NotificationTest(),
     );
   }
 }
@@ -199,6 +203,136 @@ class _RandomWordsState extends State<RandomWords> {
           }
         });
       },
+    );
+  }
+}
+
+
+// Notification State
+class NotificationTest extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() {
+    return _NotificationTestState();
+  }
+}
+
+class _NotificationTestState extends State<NotificationTest> {
+  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+
+  void initState() {
+    super.initState(); // 이 객체가 트리에 삽입 될 때 호출됩니다. 프레임 워크는 생성 된 각 [State] 객체에 대해이 메소드를 정확히 한 번만 호출합니다.
+    var androidSetting = AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iosSetting = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(androidSetting, iosSetting);
+
+    _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    _flutterLocalNotificationsPlugin.initialize(
+      initializationSettings, 
+      onSelectNotification: onSelectNotification
+    );
+  }
+
+  // Future 타입은 비동기 형태로 함수를 작성함을 의미한다.
+  // 참고 : https://dart.dev/codelabs/async-await
+  Future onSelectNotification(String payload) async {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Notification Payload'),
+        content: Text('Payload: $payload'),
+      )
+    );
+  }
+
+  Future _showNotificationAtTime() async {
+    var scheduleNotificationDateTime = new DateTime.now().add(new Duration(seconds: 5));
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your channel id', 'your channel name', 'your channel description',
+      sound: RawResourceAndroidNotificationSound('slow_spring_board'),
+      importance: Importance.Max,
+      priority: Priority.High
+    );
+    var iosPlatformChannelSpecifics = IOSNotificationDetails(sound: 'slow_spring.board.aiff');
+    var platformChannelSpecifics = NotificationDetails(androidPlatformChannelSpecifics, iosPlatformChannelSpecifics);
+
+    await _flutterLocalNotificationsPlugin.schedule(
+      1, 
+      '시간 지정 Notification',
+      '5초 후 알림',
+      scheduleNotificationDateTime,
+      platformChannelSpecifics,
+      payload: 'Hello Flutter1',
+    );
+  }
+
+  Future _showNotificationRepeat() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your channel id', 'your channel name', 'your channel description',
+      sound: RawResourceAndroidNotificationSound('slow_spring_board'),
+      importance: Importance.Max,
+      priority: Priority.High
+    );
+    var iosPlatformChannelSpecifics = IOSNotificationDetails(sound: 'slow_spring.board.aiff');
+    var platformChannelSpecifics = NotificationDetails(androidPlatformChannelSpecifics, iosPlatformChannelSpecifics);
+
+    await _flutterLocalNotificationsPlugin.periodicallyShow(
+      1,
+      '반복 Notification',
+      '매 분 반복 알림',
+      RepeatInterval.EveryMinute,
+      platformChannelSpecifics,
+      payload: 'Hello Flutter2'
+    );
+  }
+
+  Future _showNotificationWithSound() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your channel id', 'your channel name', 'your channel description',
+      sound: RawResourceAndroidNotificationSound('slow_spring_board'),
+      importance: Importance.Max,
+      priority: Priority.High
+    );
+    var iosPlatformChannelSpecifics = IOSNotificationDetails(sound: 'slow_spring.board.aiff');
+    var platformChannelSpecifics = NotificationDetails(androidPlatformChannelSpecifics, iosPlatformChannelSpecifics);
+
+
+    await _flutterLocalNotificationsPlugin.show(
+      0, 
+      '심플 Notification', 
+      '심플 Notification 내용', 
+      platformChannelSpecifics,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Noti Test'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(
+              child: Text('기본 Notification'),
+              onPressed: _showNotificationWithSound,
+            ),
+            RaisedButton(
+              child: Text('반복 Notification'),
+              onPressed: _showNotificationRepeat,
+            ),RaisedButton(
+              child: Text('지정 Notification'),
+              onPressed: _showNotificationAtTime,
+            ),RaisedButton(
+              child: Text('취소'),
+              onPressed: () => _flutterLocalNotificationsPlugin.cancelAll(),
+            ),
+          ],
+        )
+      ),
     );
   }
 }
