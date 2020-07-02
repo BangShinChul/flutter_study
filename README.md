@@ -39,3 +39,10 @@ samples, guidance on mobile development, and a full API reference.
 - [Dart.js에 부트 스트랩](https://flutter.dev/docs/get-started/flutter-for/react-native-devs)
 - [로컬 Notification 라이브러리](https://github.com/MaikuB/flutter_local_notifications/blob/master/flutter_local_notifications/example/lib/main.dart)
 - [로컬 Notification 라이브러리 관련 글](https://medium.com/@riokim/flutter-%EC%97%90%EC%84%9C-notification-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-ddce8af82123)
+
+* * *
+
+에러 혹은 문제의 원인을 모를때에는 아래의 마술같은 명령어를 실행해보도록 하자.
+`
+$ flutter doctor -v
+`

@@ -103,13 +103,13 @@ class _NotificationTestState extends State<NotificationTest> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              child: Text('기본 Notification'),
+              child: Text('기본 알림 발송'),
               onPressed: _showNotification,
             ),RaisedButton(
-              child: Text('반복 Notification'),
+              child: Text('1분마다 알림 반복 발송'),
               onPressed: _showNotificationRepeat,
             ),RaisedButton(
-              child: Text('지정 Notification'),
+              child: Text('5초 후 알림 발송'),
               onPressed: _showNotificationAtTime,
             ),RaisedButton(
               child: Text('취소'),
