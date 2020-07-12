@@ -15,6 +15,9 @@
     <!-- local notification (optional) -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Camera permission -->
+    <uses-permission android:name="android.permission.CAMERA" />
     
     <application
         android:name="io.flutter.app.FlutterApplication"
