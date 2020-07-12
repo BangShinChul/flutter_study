@@ -6,6 +6,7 @@ import './count/count.dart';
 import './random_words/random_word.dart';
 import './noti/noti.dart';
 import './barcode_scan/barcode_scan.dart';
+import './expire_date_alarm/expire_date_alarm.dart';
 
 // Icons 참고 : https://material.io/resources/icons/?style=baseline
 
@@ -34,7 +35,8 @@ class _MyHomePageState extends State<MyHomePage> {
     MyCountPage(),
     NotificationTest(),
     RandomWords(),
-    BarcodeScan()
+    BarcodeScan(),
+    ExpireDateAlarm()
   ];
 
   void _onTap(int index) {
@@ -70,7 +72,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 new BottomNavigationBarItem(
                   icon: Icon(Icons.camera_enhance),
                   title: Text('QrCodeScanner'),
-                )
+                ),
+                new BottomNavigationBarItem(
+                  icon: Icon(Icons.alarm),
+                  title: Text('유통기한 알리미'),
+                ),
               ]),
         ));
   }

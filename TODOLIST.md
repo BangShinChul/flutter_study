@@ -11,6 +11,7 @@
         - 해결법 : 앱 빌드 시 --no-shirik 옵션 추가. [참고 링크:R8](https://flutter.dev/docs/deployment/android#r8)
     - 내부 로컬 스토리지 데이터 읽어서 특정 시간에 특정 메시지로 알림 가도록 설정해볼 것.
 - 로컬 스토리지 사용법 테스트
+    - 참고 : https://alexband.tistory.com/55
 - 바코드 스캔 혹은 QR코드 스캔 라이브러리 검색
     - https://pub.dev/packages/flutter_barcode_scanner
     - https://pub.dev/packages/barcode_scan
